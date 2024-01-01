@@ -1,1 +1,1 @@
-token = "Enter the secret key you create here"
+token = "Enter bots secret token found in the Bot section in the Discord Developer Portal"

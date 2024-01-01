@@ -23,8 +23,9 @@ Download Python, Discord, and the files in the repository.
 
 Step 2
 ```
-Access the discord developer portal online, and grab your client secret
-key, and paste into the config.py file once you open it you will know where to 
+Access the discord developer portal online, and create a new bot. After creating it
+go to the bot section and generate the bots secret token key, and paste it
+into the config.py file.When you open it you will know where to 
 paste it.
 ```
 
@@ -66,5 +67,3 @@ Ends the pomodoro timer
 ## Acknowledgements
 
 Inspiration to make this bot came from pixegami
-
-

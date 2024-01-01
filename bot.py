@@ -7,7 +7,7 @@ from config import token
 BOT_TOKEN = token
 # Get the channel Id in your own discord server with developer mode on, and change it to yours
 CHANNEL_ID = 709941647424749679
-MAX_SESSION_TIME_MINUTES = 5
+MAX_SESSION_TIME_MINUTES = 25
 
 
 @dataclass
@@ -35,11 +35,23 @@ async def break_reminder(author):
 
     channel = bot.get_channel(CHANNEL_ID)
     await channel.send(f"{author} **Take a break for 5 minutes!** You've been studying for {MAX_SESSION_TIME_MINUTES} minutes.")
+    break_reminder_time.start(author)
+    
 
     if break_reminder.current_loop == 4:
         await channel.send(f"{author} **Take a break between 15-30 minutes! you have studied for one full loop** start the session again after coming back from break")
         session.is_active = False
 
+
+@tasks.loop(minutes=MAX_SESSION_TIME_MINUTES/5, count=2)
+async def break_reminder_time(author):
+
+    # Ignore the first execution of this command
+    if break_reminder_time.current_loop == 0:
+        return
+    
+    channel = bot.get_channel(CHANNEL_ID)
+    await channel.send(f"{author} **Break time is over time to continue working**")
 
 @bot.command()
 async def start(ctx):
